@@ -5,14 +5,20 @@ public:
         mpp[0]=1;
         int sum=0;
         int ans=0;
+        int rem=0;
         for(int i=0;i<nums.size();i++)
         {
-            sum=((sum+nums[i])%k+k)%k;
-            mpp[sum]++;
-            if(mpp[sum]>1)
+            sum+=nums[i];
+            rem=sum%k;
+            if(rem<0)
             {
-                ans+=mpp[sum]-1;
+                rem+=k;
             }
+            if(mpp.find(rem)!=mpp.end())
+            {
+                ans+=mpp[rem];
+            }
+            mpp[rem]++;
         }
         return ans;
         
