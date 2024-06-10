@@ -10,16 +10,17 @@ public:
         {
             return dp[n];
         }
-        int ans=1;
+        int ans=0;
         for(int i=1;i<=n;i++)
         {
-            if(n-i>0)
-            {
-                ans=max(ans,i*fn(n-i,dp,m));
-            }
+           if(n-i>0)
+           {
+               ans=max(ans,i*fn(n-i,dp,m));
+           }
         }
-        if(n!=m){
-            ans = max(ans,n);
+        if(n!=m)
+        {
+            ans=max(ans,n);
         }
         return dp[n]=ans;
     }
