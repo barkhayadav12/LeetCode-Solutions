@@ -1,27 +1,5 @@
 class Solution {
 public:
-    int lcs(string a,string b,int i,int j,vector<vector<int>>&dp)
-    {
-        int n=a.length();
-        int m=b.length();
-        if(i==n || j==m)
-        {
-            return 0;
-        }
-        if(dp[i][j]!=-1)
-        {
-            return dp[i][j];
-        }
-        int ans=0;
-        if(a[i]==b[j])
-        {
-            ans=a[i]+lcs(a,b,i+1,j+1,dp);
-        }
-        else{
-            ans=max(lcs(a,b,i+1,j,dp),lcs(a,b,i,j+1,dp));
-        }
-        return dp[i][j]=ans;
-    }
     int minimumDeleteSum(string s1, string s2) {
         int n=s1.length();
         int m=s2.length();
