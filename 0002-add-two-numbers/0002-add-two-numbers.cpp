@@ -16,8 +16,6 @@ public:
         int ans=p->val+q->val;
         int rem=0;
         ListNode*head;
-            ans+=rem;
-        rem=0;
             ListNode*temp;
             if(ans>=10)
             {
