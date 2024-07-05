@@ -30,7 +30,6 @@ public:
         {
             return {-1,-1};
         }
-        sort(ans.begin(),ans.end());
         int n=ans.size();
         int maxi=ans[n-1]-ans[0];
         int mini=INT_MAX;
