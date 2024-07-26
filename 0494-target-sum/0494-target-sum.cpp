@@ -1,47 +1,41 @@
 class Solution {
 public:
+    int solve(vector<int>&arr,int ind,int n,int sum,vector<vector<int>>&dp)
+	{
+	    // base case
+	    if(ind>=n && sum==0)
+	    {
+	        return 1;
+	    }
+	    if(ind>=n && sum!=0)
+	    {
+	        return 0;
+	    }
+	    if(dp[ind][sum]!=-1)
+	    {
+	        return dp[ind][sum];
+	    }
+	    if(sum-arr[ind]>=0)
+	    {
+	         int pick=solve(arr,ind+1,n,sum-arr[ind],dp);
+	         int not_pick=solve(arr,ind+1,n,sum,dp);
+	         return dp[ind][sum]=pick+not_pick;
+	    }
+	    else{
+	        int not_pick=solve(arr,ind+1,n,sum,dp);
+	        return dp[ind][sum]=not_pick;
+	    }
+	}
     int findTargetSumWays(vector<int>& nums, int target) {
         target=abs(target);
-        int sum=0;
         int n=nums.size();
-        for(int i=0;i<n;i++)
-        {
-            sum+=nums[i];
-        }
-        int sum_one=(target+sum)/2;
-        if(sum-target<0 || (sum-target)%2!=0)
+        int sum=accumulate(nums.begin(),nums.end(),0);
+        int s1=(sum+target)/2;
+        if((sum+target)%2==1)
         {
             return 0;
         }
-        int dp[n+1][sum_one+1];
-        for(int i=0;i<=n;i++)
-        {
-            for(int j=0;j<=sum_one;j++)
-            {
-                if(i==0)
-                {
-                    dp[i][j]=0;
-                }
-                if(j==0)
-                {
-                    dp[i][j]=1;
-                }
-            }
-        }
-        for(int i=1;i<=n;i++)
-        {
-            for(int j=0;j<=sum_one;j++)
-            {
-                if(nums[i-1]<=j)
-                {
-                    dp[i][j]=dp[i-1][j]+dp[i-1][j-nums[i-1]];
-                }
-                else if(nums[i-1]>j)
-                {
-                    dp[i][j]=dp[i-1][j];
-                }
-            }
-        }
-        return dp[n][sum_one];
+        vector<vector<int>>dp(n,vector<int>(s1+1,-1));
+        return solve(nums,0,n,s1,dp);
     }
 };
