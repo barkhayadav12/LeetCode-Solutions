@@ -2,6 +2,7 @@ class Solution {
 public:
     int dp_in[1001][1001][4];
     int dp_dec[1001][1001][4];
+    // increasing
     int fn_in(vector<int>&rating,int currInd,int prevInd,int k)
     {
         int n=rating.size();
@@ -20,6 +21,7 @@ public:
         }
         int not_pick=fn_in(rating,currInd+1,prevInd,k);
         int pick=0;
+        // checking if we can pick it or not
         if(prevInd==-1 || rating[currInd]>rating[prevInd])
         {
             pick=fn_in(rating,currInd+1,currInd,k-1);
@@ -45,6 +47,7 @@ public:
         }
         int not_pick=fn_dec(rating,currInd+1,prevInd,k);
         int pick=0;
+         // checking if we can pick it or not
         if(prevInd==-1 || rating[currInd]<rating[prevInd])
         {
             pick=fn_dec(rating,currInd+1,currInd,k-1);
