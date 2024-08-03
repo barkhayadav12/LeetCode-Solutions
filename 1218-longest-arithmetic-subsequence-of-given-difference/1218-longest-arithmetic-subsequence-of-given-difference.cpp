@@ -24,6 +24,10 @@ public:
         int n=arr.size();
         unordered_map<int,int>mpp;
         int ans=1;
+        // [1,2,3,4,5] diff=1
+        /*
+        At a given index, hum check kr rhe ki, suppose we are at 5 toh given diff is 1, so a.p hoga toh what should come before 5, 4 obviously, so map mein check kr rhe ki 4 present hai kya, agar nhi hai toh ek naaya subsequence banega, agar present hai toh increase the count of subsequence.
+        */
         for(int i=0;i<n;i++)
         {
             if(mpp.find(arr[i]-difference)!=mpp.end())
