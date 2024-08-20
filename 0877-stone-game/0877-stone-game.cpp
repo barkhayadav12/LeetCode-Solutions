@@ -16,14 +16,18 @@ public:
         {
             dp[i][j][isAlice]=max(piles[i]+solve(i+1,j,piles,!isAlice),piles[j]+solve(i,j-1,piles,!isAlice));
         }else{
-            dp[i][j][isAlice]=max(-piles[i]+solve(i+1,j,piles,!isAlice),-piles[j]+solve(i,j-1,piles,!isAlice));
+            // dp[i][j][isAlice]=max(-piles[i]+solve(i+1,j,piles,!isAlice),-piles[j]+solve(i,j-1,piles,!isAlice));
+            dp[i][j][isAlice]=max(solve(i+1,j,piles,!isAlice),solve(i,j-1,piles,!isAlice));
+            
         }
         return dp[i][j][isAlice];
     }
     bool stoneGame(vector<int>& piles) {
         memset(dp,-1,sizeof(dp));
         int ans=solve(0,piles.size()-1,piles,true);
-        if(ans>0)
+        int tot_sum=accumulate(piles.begin(),piles.end(),0);
+        int half=tot_sum/2;
+        if(ans>half)
         {
             return true;
         }
